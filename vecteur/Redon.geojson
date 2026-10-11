@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Redon",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32630" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "name": "AOI Redon - crue Vilaine (EMSR788)", "note": "emprise rectangulaire, identique au WKT de Vertex" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 556431.281314931577072, 5266559.095760210417211 ], [ 579003.604156720568426, 5266820.73975729290396 ], [ 578702.528765600756742, 5289048.207228234037757 ], [ 556216.237694464274682, 5288786.729806814342737 ], [ 556431.281314931577072, 5266559.095760210417211 ] ] ] } }
+]
+}

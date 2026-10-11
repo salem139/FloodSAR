@@ -1,0 +1,256 @@
+body, html {
+    height: 100%; /*la hauteur*/
+    margin: 0; /*la marge*/
+    padding: 0; /*l'espacement*/
+    font-family: Calibri, sans-serif;
+}
+
+/* Styles de base pour la carte */
+#map {
+    position: absolute; /*Positionnement par rapport à son contenu*/
+    top: 0; /*Gestion du bord supérieur*/
+    left: 0; /*Gestion du bord gauche*/
+    width: 100%; /*la largeur*/
+    height: 100%; /*la hauteur*/
+    z-index: 0; /*son niveau d'affichage par rapport aux autres élements */
+}
+
+/* Fondu enchaîné entre deux dates */
+.leaflet-image-layer {
+    transition: opacity 0.45s ease;
+}
+
+/* Colonne de gauche : le titre fixe la largeur, le panneau d'informations s'y aligne */
+#colonneGauche {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    max-width: 90vw;
+}
+
+/* Styles pour le titre */
+.titre {
+    padding: 10px 16px;
+    text-align: center;
+    background-color: rgba(233, 233, 233);
+    font-family: Calibri, sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: rgb(15, 14, 14);
+}
+
+.sous-titre {
+    font-size: 15px;
+    font-weight: normal;
+    color: #4b4f55;
+    margin-top: 2px;
+}
+
+.icone-apres::before {
+    content: "";
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+/* Styles pour les contrôles de la couche */
+.leaflet-control-layers {
+    pointer-events: auto;
+    align-items: center;
+    top: 30px;
+    right: 0px;
+}
+
+/* Styles pour les contrôles de zoom */
+.leaflet-control-zoom {
+    pointer-events: auto;
+    align-items: center;
+    top: 30px;
+    right: 2px;
+}
+
+/* Styles pour le conteneur des onglets */
+.tabs-container {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+}
+
+/* Styles pour chaque onglet */
+.tab {
+    background-color: rgba(122, 126, 123, 0.95);
+    color: rgb(15, 14, 14);
+    padding: 10px;
+    font-family: Calibri, sans-serif;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    text-align: center;
+    width: 200px;
+    height: 15px;
+}
+
+.tab:hover {
+    background-color: #579757; /* Vert en survol */
+}
+
+.tab.active {
+    background-color: #af5d42;
+    color: white;
+}
+
+/* ============ Panneau d'informations ============ */
+#infoPanel {
+    /* width:0 + min-width:100% : le panneau prend la largeur du titre sans l'élargir */
+    width: 0;
+    min-width: 100%;
+    margin-top: 6px;
+    background-color: rgba(233, 233, 233);
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#infoPanel h3 {
+    font-size: 20px;
+    margin: 0 0 4px 0;
+    font-weight: bold;
+}
+
+#infoPanel p {
+    font-size: 14px;
+    margin: 6px 0;
+    color: #333;
+}
+
+.tag {
+    display: inline-block;
+    font-size: 13px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: #579757;
+    color: white;
+}
+
+.tag.ems { background: #e07b39; }
+
+.chiffres {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.chiffres > div {
+    flex: 1;
+    background: white;
+    border-radius: 5px;
+    padding: 6px;
+    text-align: center;
+}
+
+.chiffres span {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f78b4;
+}
+
+.chiffres small { font-size: 12px; color: #555; }
+
+#chartContainer { height: 150px; margin-top: 8px; background: white; border-radius: 5px; padding: 4px; }
+
+#avertissement { color: #b00020 !important; font-size: 12px !important; }
+
+/* ============ Légende (dans le panneau d'informations) ============ */
+#legende {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #c4c4c4;
+    font-size: 14px;
+}
+
+#legende .ligne { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+#legende .carre { width: 22px; height: 14px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.25); flex: none; }
+#legende .degrade { width: 120px; height: 12px; border: 1px solid rgba(0,0,0,0.25); background: linear-gradient(to right, #000, #fff); }
+
+/* ============ Panneau du slider ============ */
+#timePanel {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 560px;
+    max-width: calc(100% - 640px);
+    min-width: 380px;
+    background-color: rgba(233, 233, 233);
+    padding: 10px 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.groupes { display: flex; gap: 6px; margin-bottom: 8px; }
+
+.btn-groupe {
+    flex: 1;
+    padding: 6px;
+    font-family: Calibri, sans-serif;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: rgba(122, 126, 123, 0.95);
+    cursor: pointer;
+}
+
+.btn-groupe:hover { background-color: #579757; }
+.btn-groupe.active { background-color: #af5d42; color: white; }
+
+.ligne-slider { display: flex; align-items: center; gap: 10px; }
+#sliderTemps { flex: 1; accent-color: #af5d42; cursor: pointer; }
+
+#btnPlay {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    background: #579757;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#graduations { display: flex; justify-content: space-between; margin: 4px 0 0 46px; }
+
+#graduations button {
+    flex: 1;
+    background: none; border: none;
+    font-family: Calibri, sans-serif; font-size: 13px;
+    color: #1f78b4; cursor: pointer; padding: 2px 0;
+}
+
+#graduations button.ems { color: #e07b39; }
+#graduations button.actif { font-weight: bold; color: #e31a1c; }
+
+.ligne-opacite { display: flex; align-items: center; gap: 10px; margin-top: 6px; font-size: 13px; }
+.ligne-opacite input { flex: 1; accent-color: #579757; }
+
+/* ============ Petits écrans ============ */
+@media (max-width: 1000px) {
+    #timePanel { max-width: none; width: calc(100% - 20px); left: 10px; transform: none; bottom: 10px; }
+    #colonneGauche { max-width: 62vw; }
+    .tab { width: 110px; }
+    .titre { font-size: 20px; }
+}

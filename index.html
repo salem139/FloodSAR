@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crue de la Vilaine à Redon - Sentinel-1</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+
+<body>
+    <!-- Onglets -->
+    <div class="tabs-container">
+        <div class="tab" id="tabTutoriel">Tutoriel</div>
+        <div class="tab" id="tabref">Références</div>
+    </div>
+
+    <!-- Colonne de gauche : titre + panneau d'informations (même largeur) -->
+    <div id="colonneGauche">
+        <div class="titre">
+            <strong><span class="icone-apres"></span> Crue de la Vilaine à Redon</strong>
+            <div class="sous-titre">Suivi par imagerie radar Sentinel-1 · janvier - février 2025</div>
+        </div>
+
+        <div id="infoPanel">
+            <h3 id="infoTitre"></h3>
+            <div id="infoRole" class="tag"></div>
+            <p id="infoDetail"></p>
+            <div id="statsBloc">
+                <div class="chiffres">
+                    <div><span id="statKm2">-</span><small>km² inondés</small></div>
+                    <div><span id="statPct">-</span><small>de la zone d'étude</small></div>
+                </div>
+                <div id="chartContainer"><canvas id="surfaceChart"></canvas></div>
+            </div>
+            <!-- Légende (dans le même bloc, sous le graphique) -->
+            <div id="legende"></div>
+            <p id="avertissement"></p>
+        </div>
+    </div>
+
+    <!-- Panneau du slider temporel -->
+    <div id="timePanel">
+        <div class="groupes">
+            <button class="btn-groupe" data-groupe="crue">Crue détectée</button>
+            <button class="btn-groupe" data-groupe="vv">Image radar (VV)</button>
+        </div>
+        <div class="ligne-slider">
+            <button id="btnPlay" title="Lecture / pause (barre d'espace)">&#9654;</button>
+            <input id="sliderTemps" type="range" min="0" max="3" step="1" value="0">
+        </div>
+        <div id="graduations"></div>
+        <div class="ligne-opacite">
+            <label for="sliderOpacite">Opacité</label>
+            <input id="sliderOpacite" type="range" min="0.1" max="1" step="0.05" value="0.85">
+        </div>
+    </div>
+
+    <div id="mapContainer">
+        <div id="map"></div>
+    </div>
+
+    <script src="./main.js"></script>
+</body>
+
+</html>
